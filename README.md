@@ -4,20 +4,19 @@ This project helps to understand cloud infrastructure concepts by simulating a c
 
 #### Think of the setup as a neighborhood where everything works together to keep the community running smoothly, safely, and efficiently—just like a real cloud network, but all local.
 ---
-
-## Tools and Automation
-
-This project uses:
-
-- **MinIO**: Self-hosted object storage for data management.
-- **Docker**: To containerize MinIO and network components locally.
-- **MinIO Client (`mc`)**: For administration with user, policy, and batch job management.
-- **Bash scripts**: Automate user creation, policy setup, key rotation, and encryption key batch rotation.
-- **Cron/CI pipelines**: Suggested for scheduling automation jobs.
-
 ```bash
 ./run_minio_pipeline.sh
 ```
+
+This script will:
+
+- Start and configure the MinIO Docker container  
+- Setup MinIO client alias and generate local CA certificates  
+- Create bucket and attach security policies  
+- Create users and service accounts with read/write policies  
+- Rotate access keys in batch  
+- Encrypt and upload a test file to MinIO storage 
+
 ---
 
 ## The Neighborhood (Virtual Cloud Network - VCN)
