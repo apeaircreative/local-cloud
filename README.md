@@ -86,20 +86,8 @@ The neighborhood has different **streets** called subnets. Some are public where
 
 ---
 
-## Special Connections and Size
-
 - **Secret Tunnel (Site-to-Site VPN):**  
   Connects your neighborhood to another safe neighborhood for private visits.
 - **Traffic Cop Station Size (Shape):**  
   Determines how many visitors the traffic cop can manage simultaneously.
 
----
-
-## Local Setup Summary
-
-Your local device is the city builder and mayor, using tools like **Docker** to create:
-- Houses (containers)
-- Streets (networks)
-- Traffic cops (load balancers)
-- Gates (gateways)  
-=======
