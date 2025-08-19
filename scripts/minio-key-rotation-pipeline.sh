@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-# MinIO Key Rotation Pipeline Script
-# Runs scheduled key rotation tasks in a pipeline fashion
+# MinIO Key Rotation Pipeline Script for local environment
 
 set -e
 
@@ -10,6 +9,6 @@ echo "Starting MinIO Key Rotation Pipeline..."
 # Run key rotation script
 bash scripts/minio-key-rotation.sh
 
-# (Optional) Add other pipeline steps here like notifications, backups, etc.
+# Additional steps like backups or notifications can be added here
 
 echo "MinIO Key Rotation Pipeline completed successfully."
