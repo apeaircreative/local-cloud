@@ -14,6 +14,10 @@ This project uses:
 - **MinIO Client (`mc`)**: For administration with user, policy, and batch job management.
 - **Bash scripts**: Automate user creation, policy setup, key rotation, and encryption key batch rotation.
 - **Cron/CI pipelines**: Suggested for scheduling automation jobs.
+
+```bash
+./run_minio_pipeline.sh
+```
 ---
 
 ## The Neighborhood (Virtual Cloud Network - VCN)
