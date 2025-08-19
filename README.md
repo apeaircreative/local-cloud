@@ -2,7 +2,7 @@
 
 This project helps to understand cloud infrastructure concepts by simulating a cloud environment.
 
-Think of the setup as a neighborhood where everything works together to keep the community running smoothly, safely, and efficiently—just like a real cloud network, but all local.
+#### Think of the setup as a neighborhood where everything works together to keep the community running smoothly, safely, and efficiently—just like a real cloud network, but all local.
 ---
 
 ## Tools and Automation
