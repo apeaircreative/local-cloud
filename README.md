@@ -103,6 +103,3 @@ Your local device is the city builder and mayor, using tools like **Docker** to 
 - Traffic cops (load balancers)
 - Gates (gateways)  
 =======
-# local-cloud
-Local Cloud Infrastructure Practice
->>>>>>> a8a9067675055769595d791cff3911f50c465bd7
