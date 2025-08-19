@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-# MinIO Client Encrypt and Upload Script
-# Encrypts a file locally then uploads to MinIO
+# MinIO Client Encrypt and Upload Script (local environment)
 
 set -e
 
@@ -15,13 +14,13 @@ if [ -z "$FILE_TO_UPLOAD" ] || [ -z "$BUCKET_NAME" ]; then
   exit 1
 fi
 
-echo "Encrypting and uploading $FILE_TO_UPLOAD to $BUCKET_NAME..."
+echo "Encrypting and uploading $FILE_TO_UPLOAD to bucket $BUCKET_NAME..."
 
-# Encrypt file (example with openssl)
+# Encrypt the file locally using openssl AES-256-CBC
 openssl enc -aes-256-cbc -salt -in "$FILE_TO_UPLOAD" -out "$FILE_TO_UPLOAD.enc" -k "$ENCRYPTION_KEY"
 
 # Upload encrypted file to MinIO bucket
-mc cp "$FILE_TO_UPLOAD.enc" $MC_ALIAS/$BUCKET_NAME/
+mc cp "$FILE_TO_UPLOAD.enc" "$MC_ALIAS/$BUCKET_NAME/"
 
-echo "Upload complete. Removing encrypted local file."
+echo "Upload complete. Removing local encrypted file."
 rm "$FILE_TO_UPLOAD.enc"

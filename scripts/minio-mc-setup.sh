@@ -1,21 +1,11 @@
 #!/bin/bash
 #
-# MinIO Client Setup Script
-# Installs or configures mc (Minio Client)
+# MinIO Client Setup Script for local instance only
 
 set -e
 
-echo "Setting up MinIO client..."
+echo "Setting up mc alias for local MinIO..."
 
-# Example of installing mc if not installed (Linux/Darwin)
-if ! command -v mc &> /dev/null; then
-  echo "mc not found. Installing..."
-  curl -O https://dl.min.io/client/mc/release/darwin-amd64/mc
-  chmod +x mc
-  mv mc /usr/local/bin/
-fi
+mc alias set localminio http://localhost:9000 admin adminpassword --insecure
 
-# Configure alias for local MinIO server
-mc alias set localminio http://localhost:9000 admin adminpassword
-
-echo "MinIO client setup is complete."
+echo "MinIO client alias configured."
