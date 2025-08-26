@@ -1,0 +1,30 @@
+# Ignore MinIO data directories and contents
+/data/
+
+# Ignore MinIO bucket data files and metadata
+data/mybucket/
+data/*.xl.meta
+data/**/*.xl.meta
+
+# Ignore generated certificates and keys
+localhost+2.pem
+localhost+2-key.pem
+
+# Ignore logs
+minio-automation.log
+
+# Ignore private SSH keys
+my_ssh_key
+
+# Ignore pipeline script (if you want to ignore this script file)
+run_minio_pipeline.sh
+
+# OS or editor backup files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Python cache files
+__pycache__/
+*.pyc
