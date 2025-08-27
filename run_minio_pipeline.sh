@@ -4,13 +4,13 @@
 
 set -e
 
-DATA_DIR="/Users/aaliyah/Desktop/backend-server/data"
-MINIO_USER="admin"
-MINIO_PASS="adminpassword"
-CONTAINER_NAME="localminio"
-MC_ALIAS="localminio"
-TEST_BUCKET="mybucket"
-TEST_FILE="testfile.txt"
+# Load environment variables
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+else
+  echo ".env file not found. Exiting."
+  exit 1
+fi
 
 echo "Stopping and removing existing MinIO container (if any)..."
 docker stop $CONTAINER_NAME || true
