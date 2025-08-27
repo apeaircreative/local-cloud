@@ -13,7 +13,7 @@ def main():
         sys.exit(1)
 
     file_path = sys.argv[1]
-    bucket_name = sys.argv[1]
+    bucket_name = sys.argv[2]
 
     client = Minio(
         "localhost:9000",

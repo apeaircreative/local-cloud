@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 #
 # MinIO Service Account Creation Script for local MinIO (macOS bash compatible)
+
 set -e
 
-MC_ALIAS="localminio"
+# Load environment variables
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
+
+MC_ALIAS=${MC_ALIAS:-localminio}
 
 # Define service accounts and their policies as parallel arrays
 service_accounts=("service1" "service2")
@@ -65,10 +71,10 @@ for i in "${!service_accounts[@]}"; do
   sa=${service_accounts[$i]}
   policy=${policies[$i]}
   echo "Creating service account: $sa"
-  
+
   # Generate a random strong password
   password=$(openssl rand -base64 20)
-  
+
   mc admin user add $MC_ALIAS $sa $password
   echo "Attaching policy $policy to $sa"
   mc admin policy attach $MC_ALIAS $policy --user $sa
