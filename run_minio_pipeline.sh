@@ -28,26 +28,34 @@ echo "Waiting 10 seconds for MinIO server to initialize..."
 sleep 10
 
 echo "Creating MinIO client alias..."
-mc alias set $MC_ALIAS http://localhost:9000 $MINIO_USER $MINIO_PASS --insecure
+mc alias set $MC_ALIAS $MINIO_HOST $MINIO_USER $MINIO_PASS --insecure
 
 echo "Running MinIO Master Automation script..."
 chmod +x scripts/minio-master-automation.sh
 ./scripts/minio-master-automation.sh
 
-if ! mc ls $MC_ALIAS/$TEST_BUCKET > /dev/null 2>&1; then
-  echo "Creating bucket: $TEST_BUCKET"
-  mc mb $MC_ALIAS/$TEST_BUCKET
+# Use consistent env var names for bucket and test file
+: "${BUCKET_NAME:?Need to set BUCKET_NAME non-empty in .env}"
+: "${TEST_FILE:?Need to set TEST_FILE non-empty in .env}"
+
+if ! mc ls $MC_ALIAS/$BUCKET_NAME > /dev/null 2>&1; then
+  echo "Creating bucket: $BUCKET_NAME"
+  mc mb $MC_ALIAS/$BUCKET_NAME
 else
-  echo "Bucket $TEST_BUCKET already exists."
+  echo "Bucket $BUCKET_NAME already exists."
 fi
 
-echo "Creating test file: $TEST_FILE"
-echo "Hello, this is a test object for MinIO upload." > $TEST_FILE
+# Ensure TEST_FILE is a full absolute path or relative to current dir
+if [ ! -f "$TEST_FILE" ]; then
+  echo "Creating test file: $TEST_FILE"
+  echo "Hello, this is a test object for MinIO upload." > "$TEST_FILE"
+fi
 
-echo "Uploading $TEST_FILE to $TEST_BUCKET"
-mc cp $TEST_FILE $MC_ALIAS/$TEST_BUCKET/
+echo "Uploading $TEST_FILE to $BUCKET_NAME"
+mc cp "$TEST_FILE" "$MC_ALIAS/$BUCKET_NAME/"
 
-rm $TEST_FILE
+echo "Removing test file $TEST_FILE"
+rm "$TEST_FILE"
 
 echo "Full MinIO pipeline completed successfully."
 echo "Access MinIO Web Console at http://localhost:9001 with user '$MINIO_USER'"
