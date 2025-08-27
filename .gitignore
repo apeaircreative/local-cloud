@@ -7,11 +7,13 @@ data/*.xl.meta
 data/**/*.xl.meta
 
 # Ignore generated certificates and keys
+*.pem
 localhost+2.pem
 localhost+2-key.pem
 
 # Ignore logs
 minio-automation.log
+.ipynb_checkpoints
 
 # Ignore private SSH keys
 my_ssh_key
@@ -28,3 +30,7 @@ run_minio_pipeline.sh
 # Python cache files
 __pycache__/
 *.pyc
+
+# Optional: Ignore editor or IDE folders
+.vscode/
+.idea/
