@@ -5,13 +5,26 @@
 
 set -e
 
+# Load environment variables from .env if exists
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
+
+# Defaults
+MC_ALIAS=${MC_ALIAS:-localminio}
+
 if [ -z "$1" ]; then
   echo "ERROR: Bucket name must be provided as an argument"
   exit 1
 fi
 
 BUCKET_NAME=$1
-MC_ALIAS="localminio"
+
+# Verify mc CLI availability
+if ! command -v mc &> /dev/null; then
+  echo "ERROR: mc (MinIO client) not installed or not in PATH"
+  exit 1
+fi
 
 echo "Setting read-only policy on bucket: $BUCKET_NAME"
 

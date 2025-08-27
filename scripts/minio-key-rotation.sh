@@ -4,9 +4,14 @@
 
 set -e
 
-MC_ALIAS="localminio"
+# Load environment variables
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
 
-# List of users for key rotation (local users only)
+MC_ALIAS=${MC_ALIAS:-localminio}
+
+# List of users for key rotation
 users=("alice" "bob" "service1" "service2")
 
 echo "Starting key rotation for users: ${users[*]}"

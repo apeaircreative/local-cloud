@@ -4,13 +4,23 @@
 
 set -e
 
-MC_ALIAS="localminio"
+# Load environment variables
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
+
+MC_ALIAS=${MC_ALIAS:-localminio}
+ENCRYPTION_KEY=${MINIO_ENCRYPTION_KEY:-}
 FILE_TO_UPLOAD=$1
 BUCKET_NAME=$2
-ENCRYPTION_KEY="your-encryption-key"  # Store securely in production
 
 if [ -z "$FILE_TO_UPLOAD" ] || [ -z "$BUCKET_NAME" ]; then
   echo "Usage: $0 <file-to-upload> <bucket-name>"
+  exit 1
+fi
+
+if [ -z "$ENCRYPTION_KEY" ]; then
+  echo "ERROR: Encryption key (MINIO_ENCRYPTION_KEY) is not set!"
   exit 1
 fi
 
